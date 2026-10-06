@@ -1,0 +1,1580 @@
+<!DOCTYPE html>
+<html lang="ru" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Лапки и Хвостики — Ветеринарная Клиника Премиум Класса 24/7</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        emerald: {
+                            50: '#f0fdf4',
+                            100: '#dcfce7',
+                            500: '#10b981',
+                            600: '#059669',
+                            700: '#047857',
+                            900: '#064e3b',
+                        },
+                        coral: {
+                            400: '#ff7a63',
+                            500: '#ff583b',
+                            600: '#e03e22',
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Nunito', 'sans-serif'],
+                        heading: ['Montserrat', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+
+    <!-- Google Fonts & Font Awesome -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700;800&family=Nunito:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        body { font-family: 'Nunito', sans-serif; background-color: #f8fafc; }
+        h1, h2, h3, h4, .font-heading { font-family: 'Montserrat', sans-serif; }
+        .glass-card { background: rgba(255, 255, 255, 0.85); backdrop-filter: blur(12px); }
+        .pulse-red { animation: pulseRed 2s infinite; }
+        @keyframes pulseRed {
+            0% { box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.7); }
+            70% { box-shadow: 0 0 0 10px rgba(239, 68, 68, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(239, 68, 68, 0); }
+        }
+        @media print {
+            body * { visibility: hidden; }
+            #printable-ticket, #printable-ticket * { visibility: visible; }
+            #printable-ticket { position: absolute; left: 0; top: 0; width: 100%; }
+        }
+    </style>
+</head>
+<body class="text-slate-700 bg-slate-50 min-h-screen flex flex-col justify-between selection:bg-emerald-500 selection:text-white">
+
+    <!-- Emergency Top Ticker -->
+    <div class="bg-gradient-to-r from-rose-600 via-red-500 to-rose-600 text-white text-xs md:text-sm py-2 px-4 shadow-md sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto flex justify-between items-center">
+            <div class="flex items-center space-x-2 font-bold animate-pulse">
+                <span class="inline-block w-2.5 h-2.5 rounded-full bg-white pulse-red"></span>
+                <i class="fa-solid font-bold fa-truck-medical text-yellow-300"></i>
+                <span>СКОРАЯ ВЕТЕРИНАРНАЯ ПОМОЩЬ 24/7: Выезд реанимации за 20 минут!</span>
+            </div>
+            <button onclick="openEmergencyModal()" class="bg-yellow-400 hover:bg-yellow-300 text-slate-900 px-3 py-1 rounded-full text-xs font-black transition-all transform hover:scale-105 flex items-center gap-1 shadow-sm">
+                <i class="fa-solid fa-phone"></i>
+                <span class="hidden sm:inline">СРОЧНЫЙ ВЫЗОВ</span>
+            </button>
+        </div>
+    </div>
+
+    <!-- Main Header / Navigation -->
+    <header class="bg-white/90 backdrop-blur-md border-b border-slate-100 sticky top-[36px] z-40 transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+            
+            <!-- Logo -->
+            <div class="flex items-center space-x-3 cursor-pointer" onclick="switchPage('home')">
+                <div class="w-12 h-12 rounded-2xl bg-gradient-to-tr from-emerald-500 to-teal-400 flex items-center justify-center text-white shadow-lg shadow-emerald-200">
+                    <i class="fa-solid fa-paw text-2xl"></i>
+                </div>
+                <div>
+                    <span class="text-xl md:text-2xl font-black font-heading text-slate-800 tracking-tight block">
+                        Лапки<span class="text-emerald-500">&amp;</span>Хвостики
+                    </span>
+                    <span class="text-[10px] font-bold uppercase tracking-widest text-teal-600 block -mt-1">VetCare Premium 24/7</span>
+                </div>
+            </div>
+
+            <!-- Desktop Nav Links -->
+            <nav class="hidden md:flex space-x-1 lg:space-x-2 font-bold text-sm">
+                <button onclick="switchPage('home')" id="nav-home" class="nav-btn px-4 py-2.5 rounded-xl transition-all text-emerald-600 bg-emerald-50">Главная</button>
+                <button onclick="switchPage('services')" id="nav-services" class="nav-btn px-4 py-2.5 rounded-xl transition-all text-slate-600 hover:text-emerald-600 hover:bg-slate-50">Услуги и Цены</button>
+                <button onclick="switchPage('doctors')" id="nav-doctors" class="nav-btn px-4 py-2.5 rounded-xl transition-all text-slate-600 hover:text-emerald-600 hover:bg-slate-50">Врачи</button>
+                <button onclick="switchPage('booking')" id="nav-booking" class="nav-btn px-4 py-2.5 rounded-xl transition-all text-slate-600 hover:text-emerald-600 hover:bg-slate-50">Запись Онлайн</button>
+                <button onclick="switchPage('contacts')" id="nav-contacts" class="nav-btn px-4 py-2.5 rounded-xl transition-all text-slate-600 hover:text-emerald-600 hover:bg-slate-50">Контакты и 24/7</button>
+            </nav>
+
+            <!-- Action Button -->
+            <div class="hidden lg:flex items-center space-x-3">
+                <a href="tel:+78005553535" class="text-right">
+                    <span class="block text-xs font-semibold text-slate-400">Круглосуточно</span>
+                    <span class="block font-black text-slate-800 font-heading">+7 (800) 555-35-35</span>
+                </a>
+                <button onclick="switchPage('booking')" class="bg-gradient-to-r from-emerald-500 to-teal-600 text-white font-bold px-5 py-3 rounded-xl shadow-lg shadow-emerald-500/20 hover:shadow-emerald-500/40 hover:-translate-y-0.5 transition-all text-sm flex items-center space-x-2">
+                    <i class="fa-regular fa-calendar-check"></i>
+                    <span>Записаться</span>
+                </button>
+            </div>
+
+            <!-- Mobile Hamburger Button -->
+            <button onclick="toggleMobileMenu()" class="md:hidden text-slate-700 hover:text-emerald-600 p-2 text-2xl focus:outline-none">
+                <i class="fa-solid fa-bars" id="menu-icon"></i>
+            </button>
+        </div>
+
+        <!-- Mobile Navigation Drawer -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white border-b border-slate-200 px-4 pt-2 pb-6 space-y-2 shadow-xl">
+            <button onclick="switchPage('home'); toggleMobileMenu();" class="w-full text-left px-4 py-3 rounded-xl font-bold text-slate-700 hover:bg-emerald-50 hover:text-emerald-600">Главная</button>
+            <button onclick="switchPage('services'); toggleMobileMenu();" class="w-full text-left px-4 py-3 rounded-xl font-bold text-slate-700 hover:bg-emerald-50 hover:text-emerald-600">Услуги и Цены</button>
+            <button onclick="switchPage('doctors'); toggleMobileMenu();" class="w-full text-left px-4 py-3 rounded-xl font-bold text-slate-700 hover:bg-emerald-50 hover:text-emerald-600">Наши Врачи</button>
+            <button onclick="switchPage('booking'); toggleMobileMenu();" class="w-full text-left px-4 py-3 rounded-xl font-bold text-slate-700 hover:bg-emerald-50 hover:text-emerald-600">Онлайн-запись</button>
+            <button onclick="switchPage('contacts'); toggleMobileMenu();" class="w-full text-left px-4 py-3 rounded-xl font-bold text-slate-700 hover:bg-emerald-50 hover:text-emerald-600">Контакты и Помощь 24/7</button>
+            <div class="pt-2">
+                <button onclick="switchPage('booking'); toggleMobileMenu();" class="w-full bg-emerald-500 text-white font-bold py-3 rounded-xl shadow-md text-center">
+                    <i class="fa-regular fa-calendar-check mr-2"></i>Записаться на прием
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <main class="flex-grow">
+
+        <!-- ================= PAGE 1: HOME ================= -->
+        <section id="page-home" class="page-content space-y-20 pb-16">
+            
+            <!-- Hero Banner -->
+            <div class="relative overflow-hidden bg-gradient-to-br from-teal-900 via-emerald-900 to-slate-900 text-white py-20 lg:py-28 px-4 sm:px-6 lg:px-8">
+                <!-- Decorative background elements -->
+                <div class="absolute -top-24 -right-24 w-96 h-96 bg-emerald-500/20 rounded-full blur-3xl"></div>
+                <div class="absolute bottom-0 left-10 w-80 h-80 bg-teal-400/10 rounded-full blur-2xl"></div>
+
+                <div class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-12 items-center relative z-10">
+                    <!-- Left Hero Content -->
+                    <div class="lg:col-span-7 space-y-6 text-center lg:text-left">
+                        <div class="inline-flex items-center space-x-2 bg-emerald-500/20 border border-emerald-400/30 px-4 py-2 rounded-full text-emerald-300 text-xs font-bold uppercase tracking-wider">
+                            <span class="w-2 h-2 rounded-full bg-emerald-400 animate-ping"></span>
+                            <span>Доказательная ветеринария &bull; Высшая категория</span>
+                        </div>
+                        
+                        <h1 class="text-4xl sm:text-5xl lg:text-6xl font-black font-heading leading-tight">
+                            Забота и медицина <span class="text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 to-teal-200">экспертного уровня</span> для любимых лапок
+                        </h1>
+
+                        <p class="text-slate-300 text-lg md:text-xl max-w-2xl font-medium leading-relaxed">
+                            Полный спектр ветеринарных услуг от профилактики и лабораторной диагностики до сложнейших нейрохирургических операций в круглосуточном стационаре.
+                        </p>
+
+                        <!-- Animal Selector Quick Pills -->
+                        <div class="pt-2 flex flex-wrap justify-center lg:justify-start gap-3 text-sm">
+                            <span class="text-slate-400 font-semibold self-center mr-2">Принимаем:</span>
+                            <span class="bg-white/10 backdrop-blur-md border border-white/10 px-3.5 py-1.5 rounded-full text-slate-200 flex items-center gap-2">
+                                <i class="fa-solid fa-dog text-emerald-400"></i> Собаки
+                            </span>
+                            <span class="bg-white/10 backdrop-blur-md border border-white/10 px-3.5 py-1.5 rounded-full text-slate-200 flex items-center gap-2">
+                                <i class="fa-solid fa-cat text-teal-300"></i> Кошки
+                            </span>
+                            <span class="bg-white/10 backdrop-blur-md border border-white/10 px-3.5 py-1.5 rounded-full text-slate-200 flex items-center gap-2">
+                                <i class="fa-solid fa-dove text-amber-300"></i> Птицы &amp; Экзоты
+                            </span>
+                            <span class="bg-white/10 backdrop-blur-md border border-white/10 px-3.5 py-1.5 rounded-full text-slate-200 flex items-center gap-2">
+                                <i class="fa-solid fa-otter text-rose-300"></i> Грызуны
+                            </span>
+                        </div>
+
+                        <!-- CTA Buttons -->
+                        <div class="pt-4 flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4">
+                            <button onclick="switchPage('booking')" class="w-full sm:w-auto bg-gradient-to-r from-emerald-400 to-teal-500 hover:from-emerald-500 hover:to-teal-600 text-slate-9 font-black px-8 py-4 rounded-2xl shadow-xl shadow-emerald-500/25 hover:shadow-emerald-500/40 hover:-translate-y-1 transition-all text-base flex items-center justify-center space-x-3 text-slate-950">
+                                <span>Записать питомца</span>
+                                <i class="fa-solid fa-arrow-right"></i>
+                            </button>
+                            <button onclick="switchPage('services')" class="w-full sm:w-auto bg-white/10 hover:bg-white/20 text-white font-bold px-7 py-4 rounded-2xl border border-white/20 transition-all text-base flex items-center justify-center space-x-2 backdrop-blur-sm">
+                                <i class="fa-solid fa-calculator text-emerald-400"></i>
+                                <span>Рассчитать стоимость</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Right Hero Card Visual -->
+                    <div class="lg:col-span-5 relative">
+                        <div class="relative bg-gradient-to-b from-white/15 to-white/5 border border-white/20 rounded-3xl p-6 backdrop-blur-xl shadow-2xl space-y-6">
+                            
+                            <div class="flex items-center justify-between border-b border-white/10 pb-4">
+                                <div class="flex items-center space-x-3">
+                                    <div class="w-3 h-3 rounded-full bg-emerald-400 animate-ping"></div>
+                                    <span class="font-bold text-emerald-300 text-sm">Клиника работаeт прямо сейчас</span>
+                                </div>
+                                <span class="bg-emerald-500/30 text-emerald-200 text-xs font-bold px-3 py-1 rounded-full border border-emerald-400/40">24/7 OPEN</span>
+                            </div>
+
+                            <!-- Doctor Visual Card -->
+                            <div class="flex items-center space-x-4 bg-slate-900/60 p-4 rounded-2xl border border-white/10">
+                                <img src="https://images.unsplash.com/photo-1628157582853-a796fa650a6a?auto=format&fit=crop&q=80&w=200" alt="Ветеринарный врач" class="w-16 h-16 rounded-xl object-cover border-2 border-emerald-400 shadow-md">
+                                <div>
+                                    <h4 class="font-bold text-white text-base">Др. Анна Васильева</h4>
+                                    <p class="text-xs text-slate-300">Дежурный главный хирург</p>
+                                    <div class="flex items-center text-amber-400 text-xs mt-1 space-x-1">
+                                        <i class="fa-solid fa-star"></i>
+                                        <i class="fa-solid fa-star"></i>
+                                        <i class="fa-solid fa-star"></i>
+                                        <i class="fa-solid fa-star"></i>
+                                        <i class="fa-solid fa-star"></i>
+                                        <span class="text-slate-300 font-semibold ml-1">4.98 (240+ отзывов)</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Quick Stats Grid -->
+                            <div class="grid grid-cols-2 gap-3 text-center">
+                                <div class="bg-white/5 border border-white/10 p-3 rounded-xl">
+                                    <span class="block text-2xl font-black text-emerald-400 font-heading">15 000+</span>
+                                    <span class="text-xs text-slate-300">Спасенных хвостиков</span>
+                                </div>
+                                <div class="bg-white/5 border border-white/10 p-3 rounded-xl">
+                                    <span class="block text-2xl font-black text-teal-300 font-heading">18 лет</span>
+                                    <span class="text-xs text-slate-300">Бепрерывного стажа</span>
+                                </div>
+                            </div>
+
+                            <button onclick="openEmergencyModal()" class="w-full bg-gradient-to-r from-rose-500 to-red-600 text-white font-bold py-3.5 rounded-xl shadow-lg hover:from-rose-600 hover:to-red-700 transition-all text-sm flex items-center justify-center space-x-2">
+                                <i class="fa-solid fa-circle-exclamation text-amber-300 animate-bounce"></i>
+                                <span>Экстренная помощь без очереди</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Interactive Pet Health Checkup Widget -->
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="bg-white rounded-3xl p-8 shadow-xl border border-slate-100 relative overflow-hidden">
+                    <div class="absolute top-0 right-0 w-64 h-64 bg-emerald-50 rounded-full blur-3xl -z-0"></div>
+
+                    <div class="relative z-10 max-w-3xl mx-auto text-center space-y-4">
+                        <span class="bg-emerald-100 text-emerald-800 text-xs font-black px-3.5 py-1.5 rounded-full uppercase tracking-wider">
+                            <i class="fa-solid fa-stethoscope mr-1"></i> Интерактивный экспресс-тест
+                        </span>
+                        <h2 class="text-2xl sm:text-3xl font-black font-heading text-slate-900">
+                            Экспресс Карта Здоровья Питомца
+                        </h2>
+                        <p class="text-slate-600 text-sm md:text-base">
+                            Укажите симптомы или возраст питомца, и наша нейросистема подберет профильного специалиста и нужную диагностику.
+                        </p>
+
+                        <!-- Form Inputs -->
+                        <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 pt-4 text-left">
+                            <div>
+                                <label class="block text-xs font-bold text-slate-600 mb-1">Вид животного</label>
+                                <select id="checkup-pet" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2.5 text-sm font-semibold text-slate-700 focus:ring-2 focus:ring-emerald-500 outline-none">
+                                    <option value="dog">Собака 🐕</option>
+                                    <option value="cat">Кошка 🐈</option>
+                                    <option value="exotic">Экзот / Грызун 🦜</option>
+                                </select>
+                            </div>
+
+                            <div>
+                                <label class="block text-xs font-bold text-slate-600 mb-1">Возраст</label>
+                                <select id="checkup-age" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2.5 text-sm font-semibold text-slate-700 focus:ring-2 focus:ring-emerald-500 outline-none">
+                                    <option value="puppy">Малыш (до 1 года)</option>
+                                    <option value="adult">Взрослый (1 - 7 лет)</option>
+                                    <option value="senior">Пожилой (8+ лет)</option>
+                                </select>
+                            </div>
+
+                            <div>
+                                <label class="block text-xs font-bold text-slate-600 mb-1">Основная цель</label>
+                                <select id="checkup-goal" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2.5 text-sm font-semibold text-slate-700 focus:ring-2 focus:ring-emerald-500 outline-none">
+                                    <option value="checkup">Плановый Чек-Ап / Вакцинация</option>
+                                    <option value="symptom">Вялость / Потеря аппетита</option>
+                                    <option value="dental">Запах изо рта / Зубы</option>
+                                    <option value="skin">Зуд / Проблемы с шерстью</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <button onclick="runPetCheckup()" class="w-full sm:w-auto bg-slate-900 hover:bg-slate-800 text-white font-bold px-8 py-3.5 rounded-xl transition-all shadow-md mt-4 text-sm inline-flex items-center justify-center gap-2">
+                            <i class="fa-solid fa-wand-magic-sparkles text-emerald-400"></i>
+                            <span>Сформировать рекомендацию</span>
+                        </button>
+
+                        <!-- Result Box (Hidden by default) -->
+                        <div id="checkup-result" class="hidden mt-6 bg-emerald-50 border border-emerald-200 rounded-2xl p-6 text-left space-y-3 transition-all duration-300">
+                            <div class="flex items-center space-x-3 text-emerald-800 font-bold">
+                                <i class="fa-solid fa-circle-check text-emerald-600 text-xl"></i>
+                                <span id="checkup-title" class="text-lg font-heading">Рекомендованный комплекс</span>
+                            </div>
+                            <p id="checkup-text" class="text-slate-700 text-sm leading-relaxed"></p>
+                            <div class="pt-2 flex justify-end">
+                                <button onclick="switchPage('booking')" class="bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs px-5 py-2.5 rounded-lg transition-all shadow-sm">
+                                    Записаться по акции →
+                                </button>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+            <!-- Benefits Section -->
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
+                <div class="text-center max-w-2xl mx-auto space-y-3">
+                    <span class="text-emerald-600 font-bold uppercase tracking-wider text-xs">Почему выбирают нас</span>
+                    <h2 class="text-3xl font-black font-heading text-slate-900">Стандарты мировой ветеринарии</h2>
+                    <p class="text-slate-600 text-sm">Мы объединили передовое лечебное оборудование и искреннюю любовь к каждому четвероногому пациенту.</p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                    <!-- Advantage 1 -->
+                    <div class="bg-white p-6 rounded-2xl border border-slate-100 shadow-sm hover:shadow-xl transition-all duration-300 hover:-translate-y-1 group">
+                        <div class="w-14 h-14 rounded-2xl bg-emerald-100 text-emerald-600 flex items-center justify-center text-2xl mb-6 group-hover:scale-110 group-hover:bg-emerald-500 group-hover:text-white transition-all">
+                            <i class="fa-solid fa-microscope"></i>
+                        </div>
+                        <h3 class="text-lg font-bold font-heading text-slate-900 mb-2">Экспресс-Лаборатория 24/7</h3>
+                        <p class="text-slate-600 text-sm leading-relaxed">
+                            Результаты анализов крови, мочи и ПЦР-тестов готовы за 20-30 минут прямо во время вашего визита.
+                        </p>
+                    </div>
+
+                    <!-- Advantage 2 -->
+                    <div class="bg-white p-6 rounded-2xl border border-slate-100 shadow-sm hover:shadow-xl transition-all duration-300 hover:-translate-y-1 group">
+                        <div class="w-14 h-14 rounded-2xl bg-teal-100 text-teal-600 flex items-center justify-center text-2xl mb-6 group-hover:scale-110 group-hover:bg-teal-500 group-hover:text-white transition-all">
+                            <i class="fa-solid fa-bed-pulse"></i>
+                        </div>
+                        <h3 class="text-lg font-bold font-heading text-slate-900 mb-2">ОРИТ и Стационар</h3>
+                        <p class="text-slate-600 text-sm leading-relaxed">
+                            Индивидуальные отапливаемые боксы с подачей кислорода и круглосуточным мониторингом врачей.
+                        </p>
+                    </div>
+
+                    <!-- Advantage 3 -->
+                    <div class="bg-white p-6 rounded-2xl border border-slate-100 shadow-sm hover:shadow-xl transition-all duration-300 hover:-translate-y-1 group">
+                        <div class="w-14 h-14 rounded-2xl bg-amber-100 text-amber-600 flex items-center justify-center text-2xl mb-6 group-hover:scale-110 group-hover:bg-amber-500 group-hover:text-white transition-all">
+                            <i class="fa-solid fa-x-ray"></i>
+                        </div>
+                        <h3 class="text-lg font-bold font-heading text-slate-900 mb-2">УЗИ и Цифровой Рентген</h3>
+                        <p class="text-slate-600 text-sm leading-relaxed">
+                            Экспертные УЗИ-сканеры Mindray c коวัпплерографией и мгновенной детальной визуализацией.
+                        </p>
+                    </div>
+
+                    <!-- Advantage 4 -->
+                    <div class="bg-white p-6 rounded-2xl border border-slate-100 shadow-sm hover:shadow-xl transition-all duration-300 hover:-translate-y-1 group">
+                        <div class="w-14 h-14 rounded-2xl bg-rose-100 text-rose-600 flex items-center justify-center text-2xl mb-6 group-hover:scale-110 group-hover:bg-rose-500 group-hover:text-white transition-all">
+                            <i class="fa-solid fa-heart-circle-check"></i>
+                        </div>
+                        <h3 class="text-lg font-bold font-heading text-slate-900 mb-2">Принцип «Без Страха»</h3>
+                        <p class="text-slate-600 text-sm leading-relaxed">
+                            Применение феромонов, бережные методики фиксации и лакомства для снижения стресса хвостиков.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Reviews Section -->
+            <div class="bg-slate-100/70 py-16">
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-10">
+                    <div class="flex flex-col md:flex-row md:items-end justify-between">
+                        <div>
+                            <span class="text-emerald-600 font-bold uppercase tracking-wider text-xs">Истории выздоровления</span>
+                            <h2 class="text-3xl font-black font-heading text-slate-900">Отзывы благодарных владельцев</h2>
+                        </div>
+                        <div class="mt-4 md:mt-0 flex items-center space-x-2">
+                            <span class="text-2xl font-black text-slate-900 font-heading">4.9 / 5.0</span>
+                            <div class="text-amber-400 text-sm">
+                                <i class="fa-solid fa-star"></i>
+                                <i class="fa-solid fa-star"></i>
+                                <i class="fa-solid fa-star"></i>
+                                <i class="fa-solid fa-star"></i>
+                                <i class="fa-solid fa-star"></i>
+                            </div>
+                            <span class="text-xs text-slate-500 font-semibold">(Более 800 отзывов)</span>
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                        <!-- Review Card 1 -->
+                        <div class="bg-white p-6 rounded-2xl border border-slate-200/80 shadow-sm space-y-4">
+                            <div class="flex items-center justify-between">
+                                <div class="flex items-center space-x-3">
+                                    <div class="w-10 h-10 rounded-full bg-emerald-100 flex items-center justify-center text-emerald-700 font-bold">ОК</div>
+                                    <div>
+                                        <h4 class="font-bold text-slate-900 text-sm">Ольга Климова</h4>
+                                        <span class="text-xs text-slate-400">Хозяйка кота Марсика 🐈</span>
+                                    </div>
+                                </div>
+                                <span class="text-amber-400 text-xs"><i class="fa-solid fa-star"></i> 5.0</span>
+                            </div>
+                            <p class="text-slate-600 text-sm italic">
+                                «Привезли Марсика ночью с острой непроходимостью. Врач Анна Григорьевна мгновенно сделала УЗИ и провела операцию. Сейчас наш любимец абсолютно здоров!»
+                            </p>
+                            <span class="text-[11px] text-slate-400 block pt-2 border-t border-slate-100">3 дня назад &bull; Процедура: Срочная хирургия</span>
+                        </div>
+
+                        <!-- Review Card 2 -->
+                        <div class="bg-white p-6 rounded-2xl border border-slate-200/80 shadow-sm space-y-4">
+                            <div class="flex items-center justify-between">
+                                <div class="flex items-center space-x-3">
+                                    <div class="w-10 h-10 rounded-full bg-teal-100 flex items-center justify-center text-teal-700 font-bold">ДМ</div>
+                                    <div>
+                                        <h4 class="font-bold text-slate-900 text-sm">Дмитрий М.</h4>
+                                        <span class="text-xs text-slate-400">Хозяин корги Арчи 🐕</span>
+                                    </div>
+                                </div>
+                                <span class="text-amber-400 text-xs"><i class="fa-solid fa-star"></i> 5.0</span>
+                            </div>
+                            <p class="text-slate-600 text-sm italic">
+                                «Ходим сюда на чипирование, вакцинацию и чистку зубиков. Арчи совсем не боится врачей, бежит в клинику с виляющим хвостом. Спасибо за заботу!»
+                            </p>
+                            <span class="text-[11px] text-slate-400 block pt-2 border-t border-slate-100">1 неделю назад &bull; Процедура: Комплексный осмотр</span>
+                        </div>
+
+                        <!-- Review Card 3 -->
+                        <div class="bg-white p-6 rounded-2xl border border-slate-200/80 shadow-sm space-y-4">
+                            <div class="flex items-center justify-between">
+                                <div class="flex items-center space-x-3">
+                                    <div class="w-10 h-10 rounded-full bg-amber-100 flex items-center justify-center text-amber-700 font-bold">ЕВ</div>
+                                    <div>
+                                        <h4 class="font-bold text-slate-900 text-sm">Екатерина В.</h4>
+                                        <span class="text-xs text-slate-400">Хозяйка попугая Рио 🦜</span>
+                                    </div>
+                                </div>
+                                <span class="text-amber-400 text-xs"><i class="fa-solid fa-star"></i> 5.0</span>
+                            </div>
+                            <p class="text-slate-600 text-sm italic">
+                                «Найти грамотного раттолога и орнитолога в городе — огромная проблема. В "Лапки и Хвостики" нам помогли вылечить тяжелый авитаминоз у Рио. Рекомендую!»
+                            </p>
+                            <span class="text-[11px] text-slate-400 block pt-2 border-t border-slate-100">2 недели назад &bull; Процедура: Прием орнитолога</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </section>
+
+        <!-- ================= PAGE 2: SERVICES & PRICE CALCULATOR ================= -->
+        <section id="page-services" class="page-content hidden max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 space-y-12">
+            
+            <div class="text-center max-w-3xl mx-auto space-y-3">
+                <span class="bg-emerald-100 text-emerald-800 text-xs font-black px-3.5 py-1.5 rounded-full uppercase tracking-wider">Прозрачный прайс-лист</span>
+                <h1 class="text-3xl sm:text-4xl font-black font-heading text-slate-900">Услуги и Интерактивный Калькулятор</h1>
+                <p class="text-slate-600 text-sm sm:text-base">
+                    Выберите категорию или отметьте нужные процедуры в калькуляторе ниже, чтобы получить точно просчитанную смету для записи.
+                </p>
+            </div>
+
+            <!-- Category Filter Pills -->
+            <div class="flex flex-wrap justify-center gap-2" id="service-category-pills">
+                <button onclick="filterServices('all')" class="cat-pill bg-emerald-600 text-white font-bold px-4 py-2 rounded-xl text-sm transition-all shadow-sm">Все услуги</button>
+                <button onclick="filterServices('therapy')" class="cat-pill bg-white text-slate-600 hover:bg-emerald-50 font-bold px-4 py-2 rounded-xl text-sm transition-all border border-slate-200">Терапия</button>
+                <button onclick="filterServices('surgery')" class="cat-pill bg-white text-slate-600 hover:bg-emerald-50 font-bold px-4 py-2 rounded-xl text-sm transition-all border border-slate-200">Хирургия</button>
+                <button onclick="filterServices('vaccine')" class="cat-pill bg-white text-slate-600 hover:bg-emerald-50 font-bold px-4 py-2 rounded-xl text-sm transition-all border border-slate-200">Вакцинация &amp; Чип</button>
+                <button onclick="filterServices('diag')" class="cat-pill bg-white text-slate-600 hover:bg-emerald-50 font-bold px-4 py-2 rounded-xl text-sm transition-all border border-slate-200">УЗИ &amp; Диагностика</button>
+                <button onclick="filterServices('grooming')" class="cat-pill bg-white text-slate-600 hover:bg-emerald-50 font-bold px-4 py-2 rounded-xl text-sm transition-all border border-slate-200">Груминг</button>
+            </div>
+
+            <!-- Services Cards Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" id="services-grid">
+                <!-- Dynamically populated or rendered via JS -->
+            </div>
+
+            <!-- Interactive Price Calculator Box -->
+            <div class="bg-gradient-to-br from-slate-900 via-teal-950 to-slate-900 text-white rounded-3xl p-6 sm:p-10 shadow-2xl space-y-8 border border-teal-800/40">
+                <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-4 border-b border-white/10 pb-6">
+                    <div>
+                        <span class="text-amber-400 text-xs font-black uppercase tracking-wider flex items-center gap-1.5">
+                            <i class="fa-solid fa-calculator"></i> Онлайн-Калькулятор Стоимости
+                        </span>
+                        <h3 class="text-2xl sm:text-3xl font-black font-heading mt-1">Соберите индивидуальный пакет</h3>
+                    </div>
+                    <span class="text-xs text-slate-400 bg-white/10 px-3 py-1.5 rounded-lg self-start lg:self-auto">
+                        <i class="fa-solid fa-circle-info text-emerald-400 mr-1"></i> Итоговая стоимость фиксируется при записи
+                    </span>
+                </div>
+
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+                    <!-- Left Options Selector -->
+                    <div class="lg:col-span-7 space-y-6">
+                        <div>
+                            <label class="block text-xs font-bold text-slate-300 uppercase tracking-wider mb-2">1. Вид питомца</label>
+                            <div class="grid grid-cols-3 gap-3">
+                                <button onclick="setCalcPet('dog')" id="calc-pet-dog" class="calc-pet-btn active bg-emerald-500 text-slate-950 font-bold py-2.5 rounded-xl text-sm flex items-center justify-center gap-2 transition-all">
+                                    <i class="fa-solid fa-dog"></i> Собака
+                                </button>
+                                <button onclick="setCalcPet('cat')" id="calc-pet-cat" class="calc-pet-btn bg-white/10 text-slate-300 font-bold py-2.5 rounded-xl text-sm flex items-center justify-center gap-2 transition-all hover:bg-white/20">
+                                    <i class="fa-solid fa-cat"></i> Кошка
+                                </button>
+                                <button onclick="setCalcPet('exotic')" id="calc-pet-exotic" class="calc-pet-btn bg-white/10 text-slate-300 font-bold py-2.5 rounded-xl text-sm flex items-center justify-center gap-2 transition-all hover:bg-white/20">
+                                    <i class="fa-solid fa-otter"></i> Другое
+                                </button>
+                            </div>
+                        </div>
+
+                        <div>
+                            <label class="block text-xs font-bold text-slate-300 uppercase tracking-wider mb-3">2. Выберите нужные услуги и процедуры</label>
+                            <div class="space-y-2.5 max-h-80 overflow-y-auto pr-2 custom-scrollbar" id="calc-procedures-list">
+                                <!-- Populated dynamically -->
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Right Price Summary Card -->
+                    <div class="lg:col-span-5 flex flex-col justify-between bg-white/10 backdrop-blur-md rounded-2xl p-6 border border-white/10">
+                        <div class="space-y-4">
+                            <h4 class="font-bold text-white text-lg border-b border-white/10 pb-3">Состав вашей записи:</h4>
+                            
+                            <div id="calc-summary-items" class="space-y-2 text-sm text-slate-300 min-h-[120px]">
+                                <p class="text-slate-400 italic text-xs">Процедуры пока не выбраны. Отметьте галочками нужные пункты слева.</p>
+                            </div>
+                        </div>
+
+                        <div class="pt-6 border-t border-white/10 space-y-4">
+                            <div class="flex justify-between items-baseline">
+                                <span class="text-slate-300 text-sm font-semibold">Примерная стоимость:</span>
+                                <span class="text-3xl sm:text-4xl font-black text-amber-400 font-heading" id="calc-total-price">0 ₽</span>
+                            </div>
+
+                            <button onclick="applyCalcToBooking()" class="w-full bg-gradient-to-r from-emerald-400 to-teal-400 hover:from-emerald-500 hover:to-teal-500 text-slate-950 font-black py-4 rounded-xl shadow-lg transition-all text-sm flex items-center justify-center space-x-2">
+                                <span>Записаться с выбранными услугами</span>
+                                <i class="fa-solid fa-arrow-right"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </section>
+
+        <!-- ================= PAGE 3: VETERINARY DOCTORS ================= -->
+        <section id="page-doctors" class="page-content hidden max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 space-y-12">
+            
+            <div class="text-center max-w-3xl mx-auto space-y-3">
+                <span class="bg-emerald-100 text-emerald-800 text-xs font-black px-3.5 py-1.5 rounded-full uppercase tracking-wider">Наша гордость</span>
+                <h1 class="text-3xl sm:text-4xl font-black font-heading text-slate-900">Команда экспертов-ветеринаров</h1>
+                <p class="text-slate-600 text-sm sm:text-base">
+                    Врачи высшей категории с опытом международной практики, регулярно повышающие квалификацию в ведущих вет-центрах.
+                </p>
+            </div>
+
+            <!-- Doctor Specialty Filter Buttons -->
+            <div class="flex flex-wrap justify-center gap-2">
+                <button onclick="filterDoctors('all')" class="doc-pill bg-emerald-600 text-white font-bold px-4 py-2 rounded-xl text-sm transition-all shadow-sm">Все специалисты</button>
+                <button onclick="filterDoctors('хирург')" class="doc-pill bg-white text-slate-600 hover:bg-emerald-50 font-bold px-4 py-2 rounded-xl text-sm transition-all border border-slate-200">Хирурги</button>
+                <button onclick="filterDoctors('терапевт')" class="doc-pill bg-white text-slate-600 hover:bg-emerald-50 font-bold px-4 py-2 rounded-xl text-sm transition-all border border-slate-200">Терапевты</button>
+                <button onclick="filterDoctors('дерматолог')" class="doc-pill bg-white text-slate-600 hover:bg-emerald-50 font-bold px-4 py-2 rounded-xl text-sm transition-all border border-slate-200">Дерматологи</button>
+                <button onclick="filterDoctors('раттолог')" class="doc-pill bg-white text-slate-600 hover:bg-emerald-50 font-bold px-4 py-2 rounded-xl text-sm transition-all border border-slate-200">Раттологи / Экзоты</button>
+            </div>
+
+            <!-- Doctor Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8" id="doctors-grid">
+                <!-- Populated via Javascript -->
+            </div>
+
+        </section>
+
+        <!-- ================= PAGE 4: ONLINE APPOINTMENT & TICKET GENERATION ================= -->
+        <section id="page-booking" class="page-content hidden max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-10 space-y-10">
+            
+            <div class="text-center space-y-3">
+                <span class="bg-emerald-100 text-emerald-800 text-xs font-black px-3.5 py-1.5 rounded-full uppercase tracking-wider">Запись за 1 минуту</span>
+                <h1 class="text-3xl sm:text-4xl font-black font-heading text-slate-900">Онлайн-Запись на Прием</h1>
+                <p class="text-slate-600 text-sm">Выберите удобный день и время. После подтверждения формируется электронный талон визита.</p>
+            </div>
+
+            <!-- Wizard Progress Indicator Bar -->
+            <div class="bg-white p-4 rounded-2xl border border-slate-200/80 shadow-sm">
+                <div class="flex justify-between items-center relative">
+                    <!-- Progress line background -->
+                    <div class="absolute top-1/2 left-0 right-0 h-1 bg-slate-100 -translate-y-1/2 -z-0"></div>
+                    <div id="wizard-progress-bar" class="absolute top-1/2 left-0 h-1 bg-emerald-500 -translate-y-1/2 transition-all duration-300 z-0" style="width: 25%;"></div>
+
+                    <!-- Step Indicators -->
+                    <div class="wizard-step-node relative z-10 flex flex-col items-center">
+                        <div id="step-node-1" class="w-10 h-10 rounded-full bg-emerald-500 text-white font-bold flex items-center justify-center text-sm shadow-md">1</div>
+                        <span class="text-[11px] font-bold text-slate-700 mt-2">Питомец</span>
+                    </div>
+                    <div class="wizard-step-node relative z-10 flex flex-col items-center">
+                        <div id="step-node-2" class="w-10 h-10 rounded-full bg-slate-200 text-slate-600 font-bold flex items-center justify-center text-sm">2</div>
+                        <span class="text-[11px] font-bold text-slate-400 mt-2">Услуга и Врач</span>
+                    </div>
+                    <div class="wizard-step-node relative z-10 flex flex-col items-center">
+                        <div id="step-node-3" class="w-10 h-10 rounded-full bg-slate-200 text-slate-600 font-bold flex items-center justify-center text-sm">3</div>
+                        <span class="text-[11px] font-bold text-slate-400 mt-2">Дата и Время</span>
+                    </div>
+                    <div class="wizard-step-node relative z-10 flex flex-col items-center">
+                        <div id="step-node-4" class="w-10 h-10 rounded-full bg-slate-200 text-slate-600 font-bold flex items-center justify-center text-sm">4</div>
+                        <span class="text-[11px] font-bold text-slate-400 mt-2">Владелец</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Booking Form Container -->
+            <div id="booking-form-wrapper" class="bg-white rounded-3xl p-6 sm:p-10 border border-slate-200/80 shadow-xl space-y-8">
+                
+                <!-- STEP 1: PET INFO -->
+                <div id="booking-step-1" class="booking-step space-y-6">
+                    <h3 class="text-xl font-bold font-heading text-slate-900 border-b pb-3">Шаг 1: Расскажите о вашем любимце</h3>
+                    
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                        <div>
+                            <label class="block text-xs font-bold text-slate-700 uppercase mb-2">Кличка питомца *</label>
+                            <input type="text" id="book-pet-name" placeholder="Например: Барсик, Рекс" class="w-full border border-slate-200 rounded-xl px-4 py-3 text-slate-800 font-semibold focus:ring-2 focus:ring-emerald-500 outline-none">
+                        </div>
+
+                        <div>
+                            <label class="block text-xs font-bold text-slate-700 uppercase mb-2">Вид животного *</label>
+                            <select id="book-pet-type" class="w-full border border-slate-200 rounded-xl px-4 py-3 text-slate-800 font-semibold focus:ring-2 focus:ring-emerald-500 outline-none">
+                                <option value="Собака 🐕">Собака 🐕</option>
+                                <option value="Кошка 🐈">Кошка 🐈</option>
+                                <option value="Грызун / Кролик 🐹">Грызун / Кролик 🐹</option>
+                                <option value="Птица / Экзот 🦜">Птица / Экзот 🦜</option>
+                            </select>
+                        </div>
+
+                        <div>
+                            <label class="block text-xs font-bold text-slate-700 uppercase mb-2">Порода (если есть)</label>
+                            <input type="text" id="book-pet-breed" placeholder="Например: Мейн-кун, Лабрадор" class="w-full border border-slate-200 rounded-xl px-4 py-3 text-slate-800 font-semibold focus:ring-2 focus:ring-emerald-500 outline-none">
+                        </div>
+
+                        <div>
+                            <label class="block text-xs font-bold text-slate-700 uppercase mb-2">Возраст питомца</label>
+                            <input type="text" id="book-pet-age" placeholder="Например: 2 года 3 месяца" class="w-full border border-slate-200 rounded-xl px-4 py-3 text-slate-800 font-semibold focus:ring-2 focus:ring-emerald-500 outline-none">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- STEP 2: SERVICE & DOCTOR -->
+                <div id="booking-step-2" class="booking-step hidden space-y-6">
+                    <h3 class="text-xl font-bold font-heading text-slate-900 border-b pb-3">Шаг 2: Выберите категорию приёма и специалиста</h3>
+                    
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                        <div>
+                            <label class="block text-xs font-bold text-slate-700 uppercase mb-2">Причина обращения / Услуга *</label>
+                            <select id="book-service-type" class="w-full border border-slate-200 rounded-xl px-4 py-3 text-slate-800 font-semibold focus:ring-2 focus:ring-emerald-500 outline-none">
+                                <option value="Первичный осмотр и консультация">Первичный осмотр терапевта (1 500 ₽)</option>
+                                <option value="Комплексная вакцинация">Комплексная вакцинация + Паспорт (2 800 ₽)</option>
+                                <option value="УЗИ органов брюшной полости">УЗИ диагностика (2 200 ₽)</option>
+                                <option value="Консультация хирурга">Консультация хирурга (2 000 ₽)</option>
+                                <option value="Гигиеническая чистка зубов">Стоматология / Чистка (4 500 ₽)</option>
+                                <option value="Прием орнитолога / раттолога">Прием узкого специалиста (2 500 ₽)</option>
+                            </select>
+                        </div>
+
+                        <div>
+                            <label class="block text-xs font-bold text-slate-700 uppercase mb-2">Желаемый врач *</label>
+                            <select id="book-doctor" class="w-full border border-slate-200 rounded-xl px-4 py-3 text-slate-800 font-semibold focus:ring-2 focus:ring-emerald-500 outline-none">
+                                <option value="Любой дежурный врач">Любой дежурный специалист</option>
+                                <option value="Др. Анна Васильева (Главный Хирург)">Др. Анна Васильева (Главный Хирург)</option>
+                                <option value="Др. Михаил Орлов (Терапевт)">Др. Михаил Орлов (Терапевт)</option>
+                                <option value="Др. Елена Соколова (Дерматолог)">Др. Елена Соколова (Дерматолог)</option>
+                                <option value="Др. Илья Морозов (Раттолог)">Др. Илья Морозов (Раттолог/Экзоты)</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <!-- Extra Services Pre-Selected Summary if came from Calculator -->
+                    <div id="book-calc-attached" class="hidden bg-emerald-50 border border-emerald-200 rounded-xl p-4 text-xs text-emerald-900 space-y-1">
+                        <span class="font-bold block text-emerald-700"><i class="fa-solid fa-calculator mr-1"></i> Прикреплены процедуры из калькулятора:</span>
+                        <div id="book-calc-attached-list" class="list-disc pl-4"></div>
+                    </div>
+                </div>
+
+                <!-- STEP 3: DATE & TIME -->
+                <div id="booking-step-3" class="booking-step hidden space-y-6">
+                    <h3 class="text-xl font-bold font-heading text-slate-900 border-b pb-3">Шаг 3: Дата и удобное время</h3>
+                    
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                        <div>
+                            <label class="block text-xs font-bold text-slate-700 uppercase mb-2">Дата приема *</label>
+                            <input type="date" id="book-date" class="w-full border border-slate-200 rounded-xl px-4 py-3 text-slate-800 font-semibold focus:ring-2 focus:ring-emerald-500 outline-none">
+                        </div>
+
+                        <div>
+                            <label class="block text-xs font-bold text-slate-700 uppercase mb-2">Свободные слоты времени *</label>
+                            <div class="grid grid-cols-3 gap-2" id="time-slots-grid">
+                                <button type="button" onclick="selectTimeSlot(this, '09:00')" class="time-slot-btn border border-slate-200 py-2 rounded-lg text-xs font-bold hover:bg-emerald-50 hover:border-emerald-500 transition-all">09:00</button>
+                                <button type="button" onclick="selectTimeSlot(this, '10:30')" class="time-slot-btn border border-slate-200 py-2 rounded-lg text-xs font-bold hover:bg-emerald-50 hover:border-emerald-500 transition-all">10:30</button>
+                                <button type="button" onclick="selectTimeSlot(this, '12:00')" class="time-slot-btn border border-slate-200 py-2 rounded-lg text-xs font-bold hover:bg-emerald-50 hover:border-emerald-500 transition-all">12:00</button>
+                                <button type="button" onclick="selectTimeSlot(this, '14:30')" class="time-slot-btn border border-slate-200 py-2 rounded-lg text-xs font-bold hover:bg-emerald-50 hover:border-emerald-500 transition-all">14:30</button>
+                                <button type="button" onclick="selectTimeSlot(this, '16:00')" class="time-slot-btn border border-slate-200 py-2 rounded-lg text-xs font-bold hover:bg-emerald-50 hover:border-emerald-500 transition-all">16:00</button>
+                                <button type="button" onclick="selectTimeSlot(this, '18:30')" class="time-slot-btn border border-slate-200 py-2 rounded-lg text-xs font-bold hover:bg-emerald-50 hover:border-emerald-500 transition-all">18:30</button>
+                                <button type="button" onclick="selectTimeSlot(this, '20:00')" class="time-slot-btn border border-slate-200 py-2 rounded-lg text-xs font-bold hover:bg-emerald-50 hover:border-emerald-500 transition-all">20:00</button>
+                                <button type="button" onclick="selectTimeSlot(this, '22:00')" class="time-slot-btn border border-slate-200 py-2 rounded-lg text-xs font-bold hover:bg-emerald-50 hover:border-emerald-500 transition-all">22:00 Ночь</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- STEP 4: OWNER INFO -->
+                <div id="booking-step-4" class="booking-step hidden space-y-6">
+                    <h3 class="text-xl font-bold font-heading text-slate-900 border-b pb-3">Шаг 4: Контактные данные владельца</h3>
+                    
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                        <div>
+                            <label class="block text-xs font-bold text-slate-700 uppercase mb-2">Ваше Имя и Фамилия *</label>
+                            <input type="text" id="book-owner-name" placeholder="Екатерина Смирнова" class="w-full border border-slate-200 rounded-xl px-4 py-3 text-slate-800 font-semibold focus:ring-2 focus:ring-emerald-500 outline-none">
+                        </div>
+
+                        <div>
+                            <label class="block text-xs font-bold text-slate-700 uppercase mb-2">Номер телефона *</label>
+                            <input type="tel" id="book-owner-phone" placeholder="+7 (999) 000-00-00" class="w-full border border-slate-200 rounded-xl px-4 py-3 text-slate-800 font-semibold focus:ring-2 focus:ring-emerald-500 outline-none">
+                        </div>
+
+                        <div class="sm:col-span-2">
+                            <label class="block text-xs font-bold text-slate-700 uppercase mb-2">Дополнительные пожелания или симптомы</label>
+                            <textarea id="book-notes" rows="3" placeholder="Опишите, что беспокоит питомца..." class="w-full border border-slate-200 rounded-xl px-4 py-3 text-slate-800 font-semibold focus:ring-2 focus:ring-emerald-500 outline-none"></textarea>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Navigation Controls -->
+                <div class="flex justify-between items-center pt-6 border-t border-slate-100">
+                    <button id="wizard-prev-btn" onclick="wizardPrev()" class="hidden bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold px-6 py-3 rounded-xl transition-all text-sm">
+                        ← Назад
+                    </button>
+                    <div></div>
+                    <button id="wizard-next-btn" onclick="wizardNext()" class="bg-emerald-600 hover:bg-emerald-700 text-white font-bold px-8 py-3.5 rounded-xl shadow-lg transition-all text-sm flex items-center space-x-2">
+                        <span>Далее</span>
+                        <i class="fa-solid fa-arrow-right"></i>
+                    </button>
+                </div>
+
+            </div>
+
+            <!-- Digital Printable Ticket Result Box (Hidden until finish) -->
+            <div id="printable-ticket" class="hidden bg-white rounded-3xl p-8 border-2 border-emerald-500 shadow-2xl space-y-6 relative overflow-hidden">
+                <div class="bg-emerald-600 text-white p-6 -m-8 mb-6 flex justify-between items-center">
+                    <div>
+                        <span class="text-xs uppercase font-bold text-emerald-200 block">Электронный талон записи</span>
+                        <h2 class="text-2xl font-black font-heading">Лапки &amp; Хвостики</h2>
+                    </div>
+                    <div class="text-right">
+                        <span class="text-xs font-mono bg-emerald-700 px-3 py-1 rounded-full text-emerald-100" id="ticket-id">#VET-88392</span>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 text-slate-800 text-sm">
+                    <div class="space-y-2 border-b md:border-b-0 md:border-r border-slate-100 pb-4 md:pb-0 md:pr-6">
+                        <h4 class="font-bold text-emerald-700 uppercase text-xs tracking-wider">Информация о приеме</h4>
+                        <p><strong>Дата и Время:</strong> <span id="ticket-date-time" class="text-slate-900 font-bold">--</span></p>
+                        <p><strong>Врач:</strong> <span id="ticket-doctor">--</span></p>
+                        <p><strong>Услуга:</strong> <span id="ticket-service">--</span></p>
+                        <p><strong>Адрес клиники:</strong> ул. Ветеринарная, д. 12 (Филиал Центр 24/7)</p>
+                    </div>
+
+                    <div class="space-y-2">
+                        <h4 class="font-bold text-emerald-700 uppercase text-xs tracking-wider">Пациент и Владелец</h4>
+                        <p><strong>Питомец:</strong> <span id="ticket-pet" class="font-bold text-slate-900">--</span></p>
+                        <p><strong>Владелец:</strong> <span id="ticket-owner">--</span></p>
+                        <p><strong>Телефон:</strong> <span id="ticket-phone">--</span></p>
+                        <p><strong>Статус:</strong> <span class="bg-emerald-100 text-emerald-800 text-xs font-bold px-2.5 py-0.5 rounded-full">Подтверждено 24/7</span></p>
+                    </div>
+                </div>
+
+                <!-- Fake QR Code Visual -->
+                <div class="pt-4 border-t border-slate-100 flex items-center justify-between">
+                    <div class="flex items-center space-x-3">
+                        <div class="w-16 h-16 bg-slate-900 p-1 rounded-lg flex items-center justify-center text-white text-2xl font-mono">
+                            <i class="fa-solid fa-qrcode"></i>
+                        </div>
+                        <span class="text-xs text-slate-500">Покажите этот QR-код администратору на рецепции.</span>
+                    </div>
+
+                    <div class="flex space-x-3 print:hidden">
+                        <button onclick="window.print()" class="bg-slate-900 hover:bg-slate-800 text-white font-bold px-5 py-2.5 rounded-xl text-xs flex items-center gap-2">
+                            <i class="fa-solid fa-print"></i> Печать талона
+                        </button>
+                        <button onclick="resetBooking()" class="bg-emerald-600 hover:bg-emerald-700 text-white font-bold px-5 py-2.5 rounded-xl text-xs">
+                            Новая запись
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+        </section>
+
+        <!-- ================= PAGE 5: CONTACTS & 24/7 ASSISTANCE ================= -->
+        <section id="page-contacts" class="page-content hidden max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 space-y-16">
+            
+            <div class="text-center max-w-3xl mx-auto space-y-3">
+                <span class="bg-emerald-100 text-emerald-800 text-xs font-black px-3.5 py-1.5 rounded-full uppercase tracking-wider">Всегда на связи</span>
+                <h1 class="text-3xl sm:text-4xl font-black font-heading text-slate-900">Контакты и Экстренная Помощь</h1>
+                <p class="text-slate-600 text-sm sm:text-base">
+                    Три филиала с удобной парковкой, круглосуточной реанимацией и экспресс-лабораторией.
+                </p>
+            </div>
+
+            <!-- Branch Switcher & Map Mock Grid -->
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+                
+                <!-- Branch Selector List -->
+                <div class="lg:col-span-5 space-y-4">
+                    <h3 class="font-bold text-slate-900 text-lg">Выберите филиал:</h3>
+                    
+                    <!-- Branch 1 Card -->
+                    <div onclick="selectBranch(1)" id="branch-card-1" class="branch-card border-2 border-emerald-500 bg-emerald-50/50 p-5 rounded-2xl cursor-pointer transition-all space-y-2">
+                        <div class="flex justify-between items-center">
+                            <h4 class="font-bold text-slate-900 font-heading">Филиал «Центральный 24/7»</h4>
+                            <span class="bg-emerald-600 text-white text-[10px] font-black px-2.5 py-0.5 rounded-full">24/7 КРУГЛОСУТОЧНО</span>
+                        </div>
+                        <p class="text-xs text-slate-600"><i class="fa-solid fa-location-dot text-emerald-600 mr-1"></i> ул. Ветеринарная, д. 12 (м. Маяковская)</p>
+                        <p class="text-xs text-slate-600"><i class="fa-solid fa-phone text-emerald-600 mr-1"></i> +7 (800) 555-35-35</p>
+                    </div>
+
+                    <!-- Branch 2 Card -->
+                    <div onclick="selectBranch(2)" id="branch-card-2" class="branch-card border border-slate-200 bg-white p-5 rounded-2xl cursor-pointer transition-all space-y-2 hover:border-emerald-300">
+                        <div class="flex justify-between items-center">
+                            <h4 class="font-bold text-slate-900 font-heading">Филиал «Север»</h4>
+                            <span class="bg-slate-100 text-slate-700 text-[10px] font-bold px-2.5 py-0.5 rounded-full">08:00 - 23:00</span>
+                        </div>
+                        <p class="text-xs text-slate-600"><i class="fa-solid fa-location-dot text-emerald-600 mr-1"></i> пр. Северный, д. 45 (м. Сокольники)</p>
+                        <p class="text-xs text-slate-600"><i class="fa-solid fa-phone text-emerald-600 mr-1"></i> +7 (800) 555-35-36</p>
+                    </div>
+
+                    <!-- Branch 3 Card -->
+                    <div onclick="selectBranch(3)" id="branch-card-3" class="branch-card border border-slate-200 bg-white p-5 rounded-2xl cursor-pointer transition-all space-y-2 hover:border-emerald-300">
+                        <div class="flex justify-between items-center">
+                            <h4 class="font-bold text-slate-900 font-heading">Филиал «Южный»</h4>
+                            <span class="bg-slate-100 text-slate-700 text-[10px] font-bold px-2.5 py-0.5 rounded-full">09:00 - 21:00</span>
+                        </div>
+                        <p class="text-xs text-slate-600"><i class="fa-solid fa-location-dot text-emerald-600 mr-1"></i> ул. Южная, д. 88 (м. Автозаводская)</p>
+                        <p class="text-xs text-slate-600"><i class="fa-solid fa-phone text-emerald-600 mr-1"></i> +7 (800) 555-35-37</p>
+                    </div>
+                </div>
+
+                <!-- Interactive Map Graphic Mock -->
+                <div class="lg:col-span-7 bg-slate-800 rounded-3xl h-96 relative overflow-hidden flex items-center justify-center p-6 text-white text-center shadow-xl">
+                    <div class="absolute inset-0 opacity-30 bg-[radial-gradient(#10b981_1px,transparent_1px)] [background-size:16px_16px]"></div>
+                    
+                    <div class="relative z-10 space-y-4 max-w-md">
+                        <div class="w-16 h-16 rounded-full bg-emerald-500/20 text-emerald-400 border border-emerald-400 flex items-center justify-center text-3xl mx-auto animate-bounce">
+                            <i class="fa-solid fa-location-dot"></i>
+                        </div>
+                        <h4 id="map-branch-title" class="text-xl font-bold font-heading">Филиал «Центральный 24/7»</h4>
+                        <p id="map-branch-desc" class="text-xs text-slate-300">Оснащен собственным паркингом на 20 мест, стационаром и блоком томографии.</p>
+                        <a href="https://maps.google.com" target="_blank" class="inline-block bg-emerald-500 hover:bg-emerald-600 text-slate-950 font-bold px-6 py-2.5 rounded-xl text-xs transition-all shadow-md">
+                            Открыть в Яндекс.Картах / Google Maps
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Pet First Aid Cheat Sheet -->
+            <div class="bg-gradient-to-r from-rose-50 via-orange-50 to-amber-50 rounded-3xl p-6 sm:p-10 border border-rose-200 space-y-6">
+                <div class="flex items-center space-x-3 text-rose-600">
+                    <i class="fa-solid fa-kit-medical text-3xl"></i>
+                    <div>
+                        <h3 class="text-2xl font-black font-heading text-slate-900">Шпаргалка Первой Помощи для Хозяина</h3>
+                        <p class="text-xs text-slate-600">Что делать до приезда ветеринарного врача в экстренной ситуации</p>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <div class="bg-white p-5 rounded-2xl border border-rose-100 shadow-sm space-y-2">
+                        <span class="font-bold text-rose-600 text-sm flex items-center gap-1.5">
+                            <i class="fa-solid fa-skull-crossbones"></i> Отравление или яд
+                        </span>
+                        <p class="text-xs text-slate-600 leading-relaxed">
+                            Не пытайтесь вызвать рвоту самостоятельно! Срочно сохраните упаковку от вещества, обеспечьте доступ к свежему воздуху и везите питомца в клинику.
+                        </p>
+                    </div>
+
+                    <div class="bg-white p-5 rounded-2xl border border-rose-100 shadow-sm space-y-2">
+                        <span class="font-bold text-rose-600 text-sm flex items-center gap-1.5">
+                            <i class="fa-solid fa-bone"></i> Травма или падение
+                        </span>
+                        <p class="text-xs text-slate-600 leading-relaxed">
+                            Положите животное на жесткую ровную поверхность (фанера, плотный картон). Не сгибайте лапы и позвоночник, накройте теплым пледом.
+                        </p>
+                    </div>
+
+                    <div class="bg-white p-5 rounded-2xl border border-rose-100 shadow-sm space-y-2">
+                        <span class="font-bold text-rose-600 text-sm flex items-center gap-1.5">
+                            <i class="fa-solid fa-wind"></i> Затрудненное дыхание
+                        </span>
+                        <p class="text-xs text-slate-600 leading-relaxed">
+                            Освободите шею от ошейника. Расстегните шлейку. Обеспечьте приток воздуха, не создавайте паники вокруг животного и срочно звоните в реанимацию.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Interactive FAQ Accordion -->
+            <div class="max-w-4xl mx-auto space-y-6">
+                <div class="text-center space-y-2">
+                    <h3 class="text-2xl font-black font-heading text-slate-900">Часто задаваемые вопросы</h3>
+                    <p class="text-xs text-slate-500">Ответы на популярные вопросы о посещении клиники</p>
+                </div>
+
+                <div class="space-y-3" id="faq-accordion">
+                    <!-- Dynamic FAQ Items -->
+                </div>
+            </div>
+
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-slate-900 text-slate-400 py-12 border-t border-slate-800 text-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 md:grid-cols-4 gap-8">
+            <div class="space-y-4">
+                <div class="flex items-center space-x-2 text-white font-bold font-heading text-lg">
+                    <i class="fa-solid fa-paw text-emerald-400"></i>
+                    <span>Лапки &amp; Хвостики</span>
+                </div>
+                <p class="text-xs text-slate-400">Сеть современных ветеринарных клиник экспертного уровня. Мы работаем 24 часа в сутки 365 дней в году.</p>
+            </div>
+
+            <div>
+                <h4 class="text-white font-bold mb-3 font-heading text-xs uppercase tracking-wider">Навигация</h4>
+                <ul class="space-y-2 text-xs">
+                    <li><a href="#" onclick="switchPage('home')" class="hover:text-emerald-400 transition-colors">Главная</a></li>
+                    <li><a href="#" onclick="switchPage('services')" class="hover:text-emerald-400 transition-colors">Услуги и Прайс</a></li>
+                    <li><a href="#" onclick="switchPage('doctors')" class="hover:text-emerald-400 transition-colors">Наши Врачи</a></li>
+                    <li><a href="#" onclick="switchPage('booking')" class="hover:text-emerald-400 transition-colors">Запись на прием</a></li>
+                </ul>
+            </div>
+
+            <div>
+                <h4 class="text-white font-bold mb-3 font-heading text-xs uppercase tracking-wider">Контакты</h4>
+                <ul class="space-y-2 text-xs">
+                    <li>Горячая линия: +7 (800) 555-35-35</li>
+                    <li>Реанимация 24/7: +7 (495) 999-00-00</li>
+                    <li>Email: info@vetcare-premium.ru</li>
+                </ul>
+            </div>
+
+            <div>
+                <h4 class="text-white font-bold mb-3 font-heading text-xs uppercase tracking-wider">Мы в соцсетях</h4>
+                <div class="flex space-x-3 text-lg">
+                    <a href="#" class="w-9 h-9 rounded-full bg-slate-800 hover:bg-emerald-500 hover:text-white flex items-center justify-center transition-all"><i class="fa-brands fa-telegram"></i></a>
+                    <a href="#" class="w-9 h-9 rounded-full bg-slate-800 hover:bg-emerald-500 hover:text-white flex items-center justify-center transition-all"><i class="fa-brands fa-vk"></i></a>
+                    <a href="#" class="w-9 h-9 rounded-full bg-slate-800 hover:bg-emerald-500 hover:text-white flex items-center justify-center transition-all"><i class="fa-brands fa-whatsapp"></i></a>
+                </div>
+            </div>
+        </div>
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-8 mt-8 border-t border-slate-800/80 text-center text-xs text-slate-500">
+            © 2026 Ветеринарный Центр «Лапки и Хвостики». Все права защищены. Лицензия № ВЕТ-77-01-004921.
+        </div>
+    </footer>
+
+    <!-- Toast Container -->
+    <div id="toast-container" class="fixed bottom-5 right-5 z-50 flex flex-col space-y-2 max-w-sm pointer-events-none"></div>
+
+    <!-- Doctor Profile Modal -->
+    <div id="doctor-modal" class="fixed inset-0 z-50 bg-slate-900/60 backdrop-blur-sm hidden flex items-center justify-center p-4">
+        <div class="bg-white rounded-3xl max-w-lg w-full p-6 sm:p-8 space-y-6 shadow-2xl relative animate-in fade-in zoom-in duration-200">
+            <button onclick="closeDoctorModal()" class="absolute top-4 right-4 text-slate-400 hover:text-slate-600 text-xl font-bold w-8 h-8 rounded-full bg-slate-100 flex items-center justify-center">×</button>
+            
+            <div class="flex items-center space-x-4">
+                <img id="modal-doc-img" src="" alt="" class="w-20 h-20 rounded-2xl object-cover border-2 border-emerald-500 shadow-md">
+                <div>
+                    <h3 id="modal-doc-name" class="text-xl font-black font-heading text-slate-900">--</h3>
+                    <p id="modal-doc-spec" class="text-xs text-emerald-600 font-bold">--</p>
+                    <span id="modal-doc-exp" class="text-xs text-slate-400 font-semibold block mt-1">--</span>
+                </div>
+            </div>
+
+            <div class="space-y-3 text-xs text-slate-600">
+                <h4 class="font-bold text-slate-900 uppercase">О специалисте и образование:</h4>
+                <p id="modal-doc-bio">--</p>
+                <div class="bg-slate-50 p-3 rounded-xl border border-slate-100">
+                    <span class="font-bold text-slate-800 block mb-1">График приема в этом месяце:</span>
+                    <span id="modal-doc-schedule" class="text-slate-600">Пн, Ср, Пт: 09:00 - 21:00</span>
+                </div>
+            </div>
+
+            <button id="modal-doc-book-btn" class="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-3.5 rounded-xl transition-all text-sm shadow-md">
+                Записаться именно к этому врачу
+            </button>
+        </div>
+    </div>
+
+    <!-- 24/7 Emergency Hotline Modal -->
+    <div id="emergency-modal" class="fixed inset-0 z-50 bg-slate-900/70 backdrop-blur-md hidden flex items-center justify-center p-4">
+        <div class="bg-white rounded-3xl max-w-md w-full p-6 sm:p-8 space-y-6 shadow-2xl border-2 border-rose-500 text-center relative">
+            <button onclick="closeEmergencyModal()" class="absolute top-4 right-4 text-slate-400 hover:text-slate-600 text-xl font-bold">×</button>
+
+            <div class="w-16 h-16 rounded-full bg-rose-100 text-rose-600 flex items-center justify-center text-3xl mx-auto animate-bounce">
+                <i class="fa-solid fa-phone-volume"></i>
+            </div>
+
+            <div class="space-y-2">
+                <h3 class="text-2xl font-black font-heading text-slate-900">Экстренная Выездная Бригада</h3>
+                <p class="text-xs text-slate-600">Наберите номер прямо сейчас для немедленного отправления машины реанимации</p>
+            </div>
+
+            <div class="bg-rose-50 border border-rose-200 p-4 rounded-2xl space-y-1">
+                <span class="text-xs font-bold text-rose-700 uppercase">Круглосуточный диспетчер:</span>
+                <a href="tel:+78005553535" class="block text-2xl font-black text-rose-600 font-heading">+7 (800) 555-35-35</a>
+            </div>
+
+            <button onclick="closeEmergencyModal(); switchPage('booking');" class="w-full bg-slate-900 hover:bg-slate-800 text-white font-bold py-3 rounded-xl text-xs transition-all">
+                Или оставьте срочную онлайн-заявку
+            </button>
+        </div>
+    </div>
+
+    <script>
+        /* ================= DATA STRUCTURES ================= */
+        const SERVICES_DATA = [
+            { id: 1, title: 'Первичный осмотр терапевта', cat: 'therapy', price: 1500, time: '30 мин', desc: 'Комплексный осмотр, аускультация, термометрия, назначение лечения.' },
+            { id: 2, title: 'Вакцинация Nobivac / Multifel', cat: 'vaccine', price: 2800, time: '20 мин', desc: 'Вакцинация против опасных инфекций с внесением в ветеринарный паспорт.' },
+            { id: 3, title: 'УЗИ брюшной полости', cat: 'diag', price: 2200, time: '40 мин', desc: 'Детальное ультразвуковое исследование всех органов системы.' },
+            { id: 4, title: 'Хирургическая кастрация/стерилизация', cat: 'surgery', price: 4500, time: '60 мин', desc: 'Безопасная операция под газовым наркозом с микрошвом.' },
+            { id: 5, title: 'Чипирование с внесением в базу', cat: 'vaccine', price: 1800, time: '15 мин', desc: 'Установка международного микрочипа ISO с регистрацией в базе Animal-ID.' },
+            { id: 6, title: 'Гигиенический груминг и стрижка когтей', cat: 'grooming', price: 2500, time: '50 мин', desc: 'Мытье профессиональной косметикой, сушка, чистка ушек и стрижка.' },
+        ];
+
+        const PROCEDURES_CALC = [
+            { id: 'p1', name: 'Первичный осмотр и консультация', price: 1500 },
+            { id: 'p2', name: 'Комплексная вакцинация с паспортом', price: 2800 },
+            { id: 'p3', name: 'УЗИ брюшной полости экспертное', price: 2200 },
+            { id: 'p4', name: 'Забор и биохимический анализ крови', price: 3100 },
+            { id: 'p5', name: 'Ультразвуковая чистка зубов', price: 4500 },
+            { id: 'p6', name: 'Чипирование с внесением в базу', price: 1800 },
+            { id: 'p7', name: 'Гигиенический уход / Груминг', price: 2500 },
+        ];
+
+        const DOCTORS_DATA = [
+            {
+                id: 1,
+                name: 'Др. Анна Григорьевна',
+                spec: 'хирург',
+                title: 'Главный вет-хирург, травматолог',
+                exp: '14 лет опыта',
+                rating: '4.98',
+                img: 'https://images.unsplash.com/photo-1628157582853-a796fa650a6a?auto=format&fit=crop&q=80&w=300',
+                bio: 'Специализируется на сложных торакальных и абдоминальных операциях. Провела более 3500 успешных операций.'
+            },
+            {
+                id: 2,
+                name: 'Др. Михаил Орлов',
+                spec: 'терапевт',
+                title: 'Ветеринарный терапевт, кардиолог',
+                exp: '9 лет опыта',
+                rating: '4.92',
+                img: 'https://images.unsplash.com/photo-1537368910025-700350fe46c7?auto=format&fit=crop&q=80&w=300',
+                bio: 'Эксперт по заболеваниям сердечно-сосудистой системы. Регулярный спикер ветеринарных конгрессов.'
+            },
+            {
+                id: 3,
+                name: 'Др. Елена Соколова',
+                spec: 'дерматолог',
+                title: 'Дерматолог, аллерголог',
+                exp: '11 лет опыта',
+                rating: '4.95',
+                img: 'https://images.unsplash.com/photo-1559839734-2b71ea197ec2?auto=format&fit=crop&q=80&w=300',
+                bio: 'Специалист по подбору элиминационных диет и лечению хронических дерматитов у собак и кошек.'
+            },
+            {
+                id: 4,
+                name: 'Др. Илья Морозов',
+                spec: 'раттолог',
+                title: 'Раттолог, врач экзотических животных',
+                exp: '8 лет опыта',
+                rating: '4.99',
+                img: 'https://images.unsplash.com/photo-1622253692010-333f2da6031d?auto=format&fit=crop&q=80&w=300',
+                bio: 'Принимает грызунов, кроликов, хорьков и рептилий. Понимает анатомию самых маленьких пациентов.'
+            }
+        ];
+
+        const FAQS_DATA = [
+            { q: 'Как подготовить питомца к сдаче анализов крови?', a: 'Анализы крови сдаются строго натощак. Голодная диета для собак и кошек составляет 8-12 часов перед забором. Доступ к чистой питьевой воде ограничивать не нужно.' },
+            { q: 'Нужна ли предварительная запись на первичный прием?', a: 'Да, мы рекомендуем записываться заранее через наш сайт или по телефону, чтобы избежать ожидания. Однако экстренные пациенты принимаются вне очереди 24/7.' },
+            { q: 'Можно ли приехать с диким или очень пугливым животным?', a: 'Конечно. В нашей клинике используются специальные успокаивающие феромоны, а также есть изолированные кабинеты приема.' }
+        ];
+
+        /* ================= STATE ================= */
+        let currentPage = 'home';
+        let calcSelectedState = new Set();
+        let calcPetType = 'dog';
+        let bookingWizardStep = 1;
+        let selectedTimeSlotVal = '';
+        let bookingData = {
+            petName: '',
+            petType: 'Собака 🐕',
+            petBreed: '',
+            petAge: '',
+            service: '',
+            doctor: '',
+            date: '',
+            time: '',
+            ownerName: '',
+            ownerPhone: '',
+            notes: '',
+            calcItems: []
+        };
+
+        /* ================= SPA ROUTING & INITIALIZATION ================= */
+        window.addEventListener('DOMContentLoaded', () => {
+            renderServices('all');
+            renderCalcProcedures();
+            renderDoctors('all');
+            renderFAQS();
+            
+            // Set default date to today in booking input
+            const today = new Date().toISOString().split('T')[0];
+            document.getElementById('book-date').value = today;
+        });
+
+        function switchPage(pageId) {
+            currentPage = pageId;
+            document.querySelectorAll('.page-content').forEach(el => el.classList.add('hidden'));
+            
+            const target = document.getElementById(`page-${pageId}`);
+            if (target) {
+                target.classList.remove('hidden');
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            }
+
+            // Update Nav buttons styling
+            document.querySelectorAll('.nav-btn').forEach(btn => {
+                btn.classList.remove('text-emerald-600', 'bg-emerald-50');
+                btn.classList.add('text-slate-600');
+            });
+            const activeNav = document.getElementById(`nav-${pageId}`);
+            if (activeNav) {
+                activeNav.classList.add('text-emerald-600', 'bg-emerald-50');
+            }
+        }
+
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobile-menu');
+            menu.classList.toggle('hidden');
+        }
+
+        /* ================= PET HEALTH CHECKUP LOGIC ================= */
+        function runPetCheckup() {
+            const pet = document.getElementById('checkup-pet').value;
+            const goal = document.getElementById('checkup-goal').value;
+            const resBox = document.getElementById('checkup-result');
+            const titleEl = document.getElementById('checkup-title');
+            const textEl = document.getElementById('checkup-text');
+
+            resBox.classList.remove('hidden');
+
+            if (goal === 'checkup') {
+                titleEl.textContent = 'Рекомендован: Ежегодный Чек-Ап «Здоровый Хвостик»';
+                textEl.textContent = 'Включает первичный осмотр терапевта, комплексную вакцинацию, клинический анализ крови и гигиеническую обработку.';
+            } else if (goal === 'symptom') {
+                titleEl.textContent = 'Срочный прием терапевта + Экспресс-Кровь';
+                textEl.textContent = 'Симптомы вялости могут указывать на вирусную инфекцию или пироплазмоз. Требуется осмотр врачом в течение дня.';
+            } else if (goal === 'dental') {
+                titleEl.textContent = 'Консультация ветеринарного стоматолога';
+                textEl.textContent = 'Рекомендована УЗ-чистка зубного камня под седацией для предотвращения воспаления десен.';
+            } else {
+                titleEl.textContent = 'Прием дерматолога + Соскоб на микрофлору';
+                textEl.textContent = 'Диагностика зуда и выпадения шерсти позволит быстро найти аллерген и вернуть комфорт питомцу.';
+            }
+
+            showToast('Расчет готов!', 'Сформирована индивидуальная рекомендация', 'success');
+        }
+
+        /* ================= SERVICES & CALCULATOR LOGIC ================= */
+        function renderServices(category) {
+            const grid = document.getElementById('services-grid');
+            grid.innerHTML = '';
+
+            const filtered = category === 'all' 
+                ? SERVICES_DATA 
+                : SERVICES_DATA.filter(s => s.cat === category);
+
+            filtered.forEach(s => {
+                grid.innerHTML += `
+                    <div class="bg-white p-6 rounded-2xl border border-slate-200/80 shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col justify-between">
+                        <div class="space-y-3">
+                            <div class="flex justify-between items-start">
+                                <h4 class="font-bold font-heading text-slate-900 text-base">${s.title}</h4>
+                                <span class="bg-emerald-100 text-emerald-800 text-[11px] font-bold px-2 py-0.5 rounded-full">${s.time}</span>
+                            </div>
+                            <p class="text-xs text-slate-500 leading-relaxed">${s.desc}</p>
+                        </div>
+                        <div class="pt-4 border-t border-slate-100 mt-4 flex items-center justify-between">
+                            <span class="text-xl font-black text-slate-900 font-heading">${s.price} ₽</span>
+                            <button onclick="quickBookService('${s.title}')" class="bg-emerald-50 hover:bg-emerald-100 text-emerald-700 font-bold px-4 py-2 rounded-xl text-xs transition-all">
+                                Записаться
+                            </button>
+                        </div>
+                    </div>
+                `;
+            });
+        }
+
+        function filterServices(category) {
+            renderServices(category);
+            document.querySelectorAll('.cat-pill').forEach(btn => {
+                btn.classList.remove('bg-emerald-600', 'text-white');
+                btn.classList.add('bg-white', 'text-slate-600');
+            });
+            event.target.classList.remove('bg-white', 'text-slate-600');
+            event.target.classList.add('bg-emerald-600', 'text-white');
+        }
+
+        function renderCalcProcedures() {
+            const list = document.getElementById('calc-procedures-list');
+            list.innerHTML = '';
+
+            PROCEDURES_CALC.forEach(item => {
+                const checked = calcSelectedState.has(item.id) ? 'checked' : '';
+                list.innerHTML += `
+                    <label class="flex items-center justify-between bg-white/5 hover:bg-white/10 p-3 rounded-xl cursor-pointer border border-white/5 transition-all">
+                        <div class="flex items-center space-x-3">
+                            <input type="checkbox" onchange="toggleCalcItem('${item.id}')" ${checked} class="w-4 h-4 accent-emerald-500 rounded">
+                            <span class="text-xs font-semibold text-slate-200">${item.name}</span>
+                        </div>
+                        <span class="text-xs font-bold text-amber-400">${item.price} ₽</span>
+                    </label>
+                `;
+            });
+        }
+
+        function toggleCalcItem(id) {
+            if (calcSelectedState.has(id)) {
+                calcSelectedState.delete(id);
+            } else {
+                calcSelectedState.add(id);
+            }
+            updateCalcSummary();
+        }
+
+        function setCalcPet(type) {
+            calcPetType = type;
+            document.querySelectorAll('.calc-pet-btn').forEach(btn => {
+                btn.classList.remove('bg-emerald-500', 'text-slate-950');
+                btn.classList.add('bg-white/10', 'text-slate-300');
+            });
+            const activeBtn = document.getElementById(`calc-pet-${type}`);
+            if (activeBtn) {
+                activeBtn.classList.remove('bg-white/10', 'text-slate-300');
+                activeBtn.classList.add('bg-emerald-500', 'text-slate-950');
+            }
+        }
+
+        function updateCalcSummary() {
+            const summaryBox = document.getElementById('calc-summary-items');
+            const totalEl = document.getElementById('calc-total-price');
+            
+            if (calcSelectedState.size === 0) {
+                summaryBox.innerHTML = `<p class="text-slate-400 italic text-xs">Процедуры пока не выбраны. Отметьте галочками нужные пункты слева.</p>`;
+                totalEl.textContent = '0 ₽';
+                return;
+            }
+
+            let total = 0;
+            summaryBox.innerHTML = '';
+            bookingData.calcItems = [];
+
+            PROCEDURES_CALC.forEach(item => {
+                if (calcSelectedState.has(item.id)) {
+                    total += item.price;
+                    bookingData.calcItems.push(item.name);
+                    summaryBox.innerHTML += `
+                        <div class="flex justify-between items-center text-xs">
+                            <span class="text-slate-200">• ${item.name}</span>
+                            <span class="font-bold text-emerald-400">${item.price} ₽</span>
+                        </div>
+                    `;
+                }
+            });
+
+            totalEl.textContent = `${total.toLocaleString()} ₽`;
+        }
+
+        function applyCalcToBooking() {
+            if (calcSelectedState.size === 0) {
+                showToast('Выберите процедуры', 'Отметьте хотя бы одну процедуру для расчетов', 'warning');
+                return;
+            }
+
+            // Update attached list preview in step 2
+            const attachedBox = document.getElementById('book-calc-attached');
+            const attachedList = document.getElementById('book-calc-attached-list');
+            attachedBox.classList.remove('hidden');
+            attachedList.innerHTML = bookingData.calcItems.map(i => `<div>• ${i}</div>`).join('');
+
+            switchPage('booking');
+            showToast('Процедуры перенесены!', 'Продолжите оформление записи', 'success');
+        }
+
+        /* ================= DOCTORS LOGIC ================= */
+        function renderDoctors(filter) {
+            const grid = document.getElementById('doctors-grid');
+            grid.innerHTML = '';
+
+            const filtered = filter === 'all' 
+                ? DOCTORS_DATA 
+                : DOCTORS_DATA.filter(d => d.spec === filter);
+
+            filtered.forEach(doc => {
+                grid.innerHTML += `
+                    <div class="bg-white rounded-2xl border border-slate-200/80 shadow-sm overflow-hidden hover:shadow-xl transition-all duration-300 flex flex-col justify-between">
+                        <div>
+                            <img src="${doc.img}" alt="${doc.name}" class="w-full h-48 object-cover">
+                            <div class="p-5 space-y-2">
+                                <div class="flex items-center justify-between">
+                                    <span class="text-amber-500 font-bold text-xs"><i class="fa-solid fa-star"></i> ${doc.rating}</span>
+                                    <span class="text-xs text-slate-400 font-semibold">${doc.exp}</span>
+                                </div>
+                                <h3 class="font-bold font-heading text-slate-900 text-lg">${doc.name}</h3>
+                                <p class="text-xs text-emerald-600 font-bold">${doc.title}</p>
+                            </div>
+                        </div>
+                        <div class="p-5 pt-0">
+                            <button onclick="openDoctorModal(${doc.id})" class="w-full bg-slate-100 hover:bg-emerald-50 text-slate-700 hover:text-emerald-700 font-bold py-2.5 rounded-xl text-xs transition-all">
+                                Резюме и Запись
+                            </button>
+                        </div>
+                    </div>
+                `;
+            });
+        }
+
+        function filterDoctors(spec) {
+            renderDoctors(spec);
+            document.querySelectorAll('.doc-pill').forEach(btn => {
+                btn.classList.remove('bg-emerald-600', 'text-white');
+                btn.classList.add('bg-white', 'text-slate-600');
+            });
+            event.target.classList.remove('bg-white', 'text-slate-600');
+            event.target.classList.add('bg-emerald-600', 'text-white');
+        }
+
+        function openDoctorModal(docId) {
+            const doc = DOCTORS_DATA.find(d => d.id === docId);
+            if (!doc) return;
+
+            document.getElementById('modal-doc-img').src = doc.img;
+            document.getElementById('modal-doc-name').textContent = doc.name;
+            document.getElementById('modal-doc-spec').textContent = doc.title;
+            document.getElementById('modal-doc-exp').textContent = doc.exp;
+            document.getElementById('modal-doc-bio').textContent = doc.bio;
+
+            const bookBtn = document.getElementById('modal-doc-book-btn');
+            bookBtn.onclick = () => {
+                closeDoctorModal();
+                document.getElementById('book-doctor').value = `${doc.name} (${doc.title.split(',')[0]})`;
+                switchPage('booking');
+            };
+
+            document.getElementById('doctor-modal').classList.remove('hidden');
+        }
+
+        function closeDoctorModal() {
+            document.getElementById('doctor-modal').classList.add('hidden');
+        }
+
+        /* ================= BOOKING WIZARD LOGIC ================= */
+        function selectTimeSlot(btn, time) {
+            document.querySelectorAll('.time-slot-btn').forEach(b => {
+                b.classList.remove('bg-emerald-600', 'text-white', 'border-emerald-600');
+                b.classList.add('border-slate-200');
+            });
+            btn.classList.remove('border-slate-200');
+            btn.classList.add('bg-emerald-600', 'text-white', 'border-emerald-600');
+            selectedTimeSlotVal = time;
+        }
+
+        function quickBookService(serviceName) {
+            switchPage('booking');
+            document.getElementById('book-service-type').value = serviceName;
+        }
+
+        function updateWizardUI() {
+            // Hide all steps
+            for (let i = 1; i <= 4; i++) {
+                document.getElementById(`booking-step-${i}`).classList.add('hidden');
+                const node = document.getElementById(`step-node-${i}`);
+                if (i <= bookingWizardStep) {
+                    node.classList.remove('bg-slate-200', 'text-slate-600');
+                    node.classList.add('bg-emerald-500', 'text-white');
+                } else {
+                    node.classList.remove('bg-emerald-500', 'text-white');
+                    node.classList.add('bg-slate-200', 'text-slate-600');
+                }
+            }
+
+            // Show active step
+            document.getElementById(`booking-step-${bookingWizardStep}`).classList.remove('hidden');
+
+            // Progress bar width
+            const progressPct = (bookingWizardStep / 4) * 100;
+            document.getElementById('wizard-progress-bar').style.width = `${progressPct}%`;
+
+            // Prev button visibility
+            const prevBtn = document.getElementById('wizard-prev-btn');
+            if (bookingWizardStep > 1) {
+                prevBtn.classList.remove('hidden');
+            } else {
+                prevBtn.classList.add('hidden');
+            }
+
+            // Next button text
+            const nextBtn = document.getElementById('wizard-next-btn');
+            if (bookingWizardStep === 4) {
+                nextBtn.innerHTML = `<span>Сформировать талон</span> <i class="fa-solid fa-check"></i>`;
+            } else {
+                nextBtn.innerHTML = `<span>Далее</span> <i class="fa-solid fa-arrow-right"></i>`;
+            }
+        }
+
+        function wizardNext() {
+            if (bookingWizardStep === 1) {
+                const petName = document.getElementById('book-pet-name').value.trim();
+                if (!petName) {
+                    showToast('Заполните поле', 'Укажите кличку вашего питомца', 'warning');
+                    return;
+                }
+                bookingData.petName = petName;
+                bookingData.petType = document.getElementById('book-pet-type').value;
+            } else if (bookingWizardStep === 3) {
+                if (!selectedTimeSlotVal) {
+                    showToast('Выберите время', 'Кликните на один из свободных слотов времени', 'warning');
+                    return;
+                }
+                bookingData.date = document.getElementById('book-date').value;
+                bookingData.time = selectedTimeSlotVal;
+            } else if (bookingWizardStep === 4) {
+                const ownerName = document.getElementById('book-owner-name').value.trim();
+                const ownerPhone = document.getElementById('book-owner-phone').value.trim();
+
+                if (!ownerName || !ownerPhone) {
+                    showToast('Заполните контакты', 'Укажите ваше имя и номер телефона', 'warning');
+                    return;
+                }
+
+                bookingData.ownerName = ownerName;
+                bookingData.ownerPhone = ownerPhone;
+                bookingData.service = document.getElementById('book-service-type').value;
+                bookingData.doctor = document.getElementById('book-doctor').value;
+
+                finishBookingAndShowTicket();
+                return;
+            }
+
+            bookingWizardStep++;
+            updateWizardUI();
+        }
+
+        function wizardPrev() {
+            if (bookingWizardStep > 1) {
+                bookingWizardStep--;
+                updateWizardUI();
+            }
+        }
+
+        function finishBookingAndShowTicket() {
+            document.getElementById('booking-form-wrapper').classList.add('hidden');
+            const ticket = document.getElementById('printable-ticket');
+            ticket.classList.remove('hidden');
+
+            document.getElementById('ticket-id').textContent = `#VET-${Math.floor(10000 + Math.random() * 90000)}`;
+            document.getElementById('ticket-date-time').textContent = `${bookingData.date} в ${bookingData.time}`;
+            document.getElementById('ticket-doctor').textContent = bookingData.doctor;
+            document.getElementById('ticket-service').textContent = bookingData.service;
+            document.getElementById('ticket-pet').textContent = `${bookingData.petName} (${bookingData.petType})`;
+            document.getElementById('ticket-owner').textContent = bookingData.ownerName;
+            document.getElementById('ticket-phone').textContent = bookingData.ownerPhone;
+
+            showToast('Запись успешно создана!', 'Ваш электронный талон готов', 'success');
+        }
+
+        function resetBooking() {
+            bookingWizardStep = 1;
+            document.getElementById('printable-ticket').classList.add('hidden');
+            document.getElementById('booking-form-wrapper').classList.remove('hidden');
+            document.getElementById('book-pet-name').value = '';
+            document.getElementById('book-owner-name').value = '';
+            document.getElementById('book-owner-phone').value = '';
+            selectedTimeSlotVal = '';
+            updateWizardUI();
+        }
+
+        /* ================= BRANCH MAP & FAQ LOGIC ================= */
+        function selectBranch(id) {
+            document.querySelectorAll('.branch-card').forEach(c => {
+                c.classList.remove('border-2', 'border-emerald-500', 'bg-emerald-50/50');
+                c.classList.add('border-slate-200', 'bg-white');
+            });
+
+            const card = document.getElementById(`branch-card-${id}`);
+            card.classList.remove('border-slate-200', 'bg-white');
+            card.classList.add('border-2', 'border-emerald-500', 'bg-emerald-50/50');
+
+            const titleEl = document.getElementById('map-branch-title');
+            const descEl = document.getElementById('map-branch-desc');
+
+            if (id === 1) {
+                titleEl.textContent = 'Филиал «Центральный 24/7»';
+                descEl.textContent = 'Оснащен собственным паркингом на 20 мест, стационаром и блоком томографии.';
+            } else if (id === 2) {
+                titleEl.textContent = 'Филиал «Север»';
+                descEl.textContent = 'Уютная клиника районного формата с отделением терапевтического ухода.';
+            } else {
+                titleEl.textContent = 'Филиал «Южный»';
+                descEl.textContent = 'Специализированный центр груминга и стоматологической хирургии.';
+            }
+        }
+
+        function renderFAQS() {
+            const container = document.getElementById('faq-accordion');
+            container.innerHTML = '';
+
+            FAQS_DATA.forEach((item, index) => {
+                container.innerHTML += `
+                    <div class="bg-white border border-slate-200/80 rounded-2xl overflow-hidden">
+                        <button onclick="toggleFaq(${index})" class="w-full text-left px-6 py-4 font-bold text-slate-800 text-sm flex justify-between items-center hover:bg-slate-50">
+                            <span>${item.q}</span>
+                            <i class="fa-solid fa-chevron-down text-slate-400 text-xs transition-transform" id="faq-icon-${index}"></i>
+                        </button>
+                        <div id="faq-ans-${index}" class="hidden px-6 pb-4 text-xs text-slate-600 leading-relaxed border-t border-slate-100 pt-3">
+                            ${item.a}
+                        </div>
+                    </div>
+                `;
+            });
+        }
+
+        function toggleFaq(index) {
+            const ans = document.getElementById(`faq-ans-${index}`);
+            const icon = document.getElementById(`faq-icon-${index}`);
+            ans.classList.toggle('hidden');
+            icon.classList.toggle('rotate-180');
+        }
+
+        /* ================= MODALS & TOAST SYSTEM ================= */
+        function openEmergencyModal() {
+            document.getElementById('emergency-modal').classList.remove('hidden');
+        }
+
+        function closeEmergencyModal() {
+            document.getElementById('emergency-modal').classList.add('hidden');
+        }
+
+        function showToast(title, message, type = 'success') {
+            const container = document.getElementById('toast-container');
+            const toast = document.createElement('div');
+            
+            const bgColor = type === 'success' ? 'bg-slate-900 text-white' : 'bg-amber-500 text-white';
+            const icon = type === 'success' ? 'fa-circle-check text-emerald-400' : 'fa-triangle-exclamation';
+
+            toast.className = `${bgColor} p-4 rounded-2xl shadow-2xl flex items-center space-x-3 text-xs font-semibold pointer-events-auto transform transition-all duration-300 translate-y-2 opacity-0`;
+            toast.innerHTML = `
+                <i class="fa-solid ${icon} text-lg"></i>
+                <div>
+                    <div class="font-bold font-heading text-sm">${title}</div>
+                    <div class="text-slate-300 font-normal">${message}</div>
+                </div>
+            `;
+
+            container.appendChild(toast);
+
+            setTimeout(() => {
+                toast.classList.remove('translate-y-2', 'opacity-0');
+            }, 10);
+
+            setTimeout(() => {
+                toast.classList.add('opacity-0', 'translate-y-2');
+                setTimeout(() => toast.remove(), 300);
+            }, 3500);
+        }
+    </script>
+</body>
+</html>
